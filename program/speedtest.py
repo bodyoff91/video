@@ -13,7 +13,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 
-@Client.on_message(command(["speedtest", f"speedtest@{bname}"]) & ~filters.edited)
+@Client.on_message(command(["بينك", f"speedtest@{bname}"]) & ~filters.edited)
 async def statsguwid(_, message: Message):
     m = await message.reply_text("Running server speedtest.")
     try:
