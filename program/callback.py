@@ -18,36 +18,36 @@ from config import (
 async def cbstart(_, query: CallbackQuery):
     await query.answer("home start")
     await query.edit_message_text(
-        f"""✨ **Welcome [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) !**\n
-💭 **[{BOT_NAME}](https://t.me/{BOT_USERNAME}) allows you to play music and video on groups through the new Telegram's video chats!**
+        f"""✨ **مرحبا [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) !**\n
+💭 **[{BOT_NAME}](https://t.me/{BOT_USERNAME}) يتيح لك تشغيل الموسيقى والفيديو في مجموعات من خلال محادثات الفيديو الجديدة في Telegram!**
 
-💡 **Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!**
+💡 **لمعرفة جميع اوامر البوت اضغط علي » 📚 زرار الاوامر!**
 
-🔖 **To know how to use this bot, please click on the » ❓ Basic Guide button!**""",
+🔖** لمعرفه طريقه استخدام اضغط علي كلمه  » ❓ زرار الدليل الاساسي!""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "➕ Add me to your Group ➕",
+                        "➕ اضفني الي مجموعتك ➕",
                         url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
                     )
                 ],
-                [InlineKeyboardButton("❓ Basic Guide", callback_data="cbhowtouse")],
+                [InlineKeyboardButton("❓ الدليل الاساسي", callback_data="cbhowtouse")],
                 [
-                    InlineKeyboardButton("📚 Commands", callback_data="cbcmds"),
-                    InlineKeyboardButton("❤ Donate", url=f"https://t.me/{OWNER_NAME}"),
+                    InlineKeyboardButton("📚 الاوامر", callback_data="cbcmds"),
+                    InlineKeyboardButton("❤ المالك", url=f"https://t.me/{OWNER_NAME}"),
                 ],
                 [
                     InlineKeyboardButton(
-                        "👥 Official Group", url=f"https://t.me/{GROUP_SUPPORT}"
+                        "👥 جروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        "📣 Official Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
+                        "📣 قناة السورس", url=f"https://t.me/{UPDATES_CHANNEL}"
                     ),
                 ],
                 [
                     InlineKeyboardButton(
-                        "🌐 Source Code", url="https://github.com/levina-lab/video-stream"
+                        "🌐 مبرمج السورس", url="https://t.me/Q_X_I_T"
                     )
                 ],
             ]
@@ -62,12 +62,12 @@ async def cbguides(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""❓ **Basic Guide for using this bot:**
 
-1.) **First, add me to your group.**
-2.) **Then, promote me as administrator and give all permissions except Anonymous Admin.**
-3.) **After promoting me, type /reload in group to refresh the admin data.**
-3.) **Add @{ASSISTANT_NAME} to your group or type /userbotjoin to invite her.**
-4.) **Turn on the video chat first before start to play video/music.**
-5.) **Sometimes, reloading the bot by using /reload command can help you to fix some problem.**
+1.) **اولا اضفني الى المجموعه.**
+2.) **ثانيا ارفعني ادمن .الي المجموعه ثم رقيني ادمن .**
+3.) **بعد الترقيه اكتب reloadلاعادة تشغيل البوت بشكل جيد.**
+3.) **ضيف @{ASSISTANT_NAME} حساب المساعد او اكتب انضم علشان يدخل .**
+4.) **بعد لما تضيفه اكتب شغل لتشغيل اغاني او اكتب فيديو لتشغيل فيديو او لايغ .**
+5.) **كل فتره اعمل reload علشان لو في خطا يتصلح.**
 
 📌 **If the userbot not joined to video chat, make sure if the video chat already turned on, or type /userbotleave then type /userbotjoin again.**
 
@@ -75,7 +75,7 @@ async def cbguides(_, query: CallbackQuery):
 
 ⚡ __Powered by {BOT_NAME} A.I__""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="cbstart")]]
+            [[InlineKeyboardButton("🔙 رجوع", callback_data="cbstart")]]
         ),
     )
 
@@ -92,12 +92,12 @@ async def cbcmds(_, query: CallbackQuery):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("👷🏻 Admin Cmd", callback_data="cbadmin"),
-                    InlineKeyboardButton("🧙🏻 Sudo Cmd", callback_data="cbsudo"),
+                    InlineKeyboardButton("👷🏻 اوامر ادمن الجروب", callback_data="cbadmin"),
+                    InlineKeyboardButton("🧙🏻 اوامر المطور ", callback_data="cbsudo"),
                 ],[
-                    InlineKeyboardButton("📚 Basic Cmd", callback_data="cbbasic")
+                    InlineKeyboardButton("📚 الاوامر", callback_data="cbbasic")
                 ],[
-                    InlineKeyboardButton("🔙 Go Back", callback_data="cbstart")
+                    InlineKeyboardButton("🔙 رجوع", callback_data="cbstart")
                 ],
             ]
         ),
@@ -110,11 +110,11 @@ async def cbbasic(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""🏮 here is the basic commands:
 
-» /play (song name/link) - play music on video chat
-» /vplay (video name/link) - play video on video chat
-» /vstream - play live video from yt live/m3u8
-» /playlist - show you the playlist
-» /video (query) - download video from youtube
+» شغل (song name/link) - play music on video chat
+» فيديو (video name/link) - play video on video chat
+» لايف - play live video from yt live/m3u8
+» /lyric (query) - scrap the song lyric
+» /search (query) - search a youtube video link
 » /song (query) - download song from youtube
 » /lyric (query) - scrap the song lyric
 » /search (query) - search a youtube video link
@@ -137,20 +137,20 @@ async def cbadmin(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""🏮 here is the admin commands:
 
-» /pause - pause the stream
-» /resume - resume the stream
-» /skip - switch to next stream
-» /stop - stop the streaming
-» /vmute - mute the userbot on voice chat
-» /vunmute - unmute the userbot on voice chat
-» /volume `1-200` - adjust the volume of music (userbot must be admin)
-» /reload - reload bot and refresh the admin data
-» /userbotjoin - invite the userbot to join group
-» /userbotleave - order userbot to leave from group
+» وقف - pause the stream
+» كمل - resume the stream
+» تخطي - switch to next stream
+»  ايقاف - stop the streaming
+» /كتم - mute the userbot on voice chat
+» الغاء كتم - unmute the userbot on voice chat
+» الصوت `1-200` - adjust the volume of music (userbot must be admin)
+» ريلود - reload bot and refresh the admin data
+» انضم - invite the userbot to join group
+» اخرج - order userbot to leave from group
 
 ⚡️ __Powered by {BOT_NAME} AI__""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="cbcmds")]]
+            [[InlineKeyboardButton("🔙 رجوع", callback_data="cbcmds")]]
         ),
     )
 
@@ -169,7 +169,7 @@ async def cbsudo(_, query: CallbackQuery):
 
 ⚡ __Powered by {BOT_NAME} AI__""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="cbcmds")]]
+            [[InlineKeyboardButton("🔙 رجوع", callback_data="cbcmds")]]
         ),
     )
 
