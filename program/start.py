@@ -49,41 +49,41 @@ async def _human_time_duration(seconds):
 
 
 @Client.on_message(
-    command(["تشغيل", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
+    command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
         f"""✨ **Welcome {message.from_user.mention()} !**\n
-💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **يتيح لك تشغيل الموسيقى والفيديو في مجموعات من خلال محادثات الفيديو الجديدة في Telegram!**
+💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **Allows you to play music and video on groups through the new Telegram's video chats!**
 
-💡 **لمعرفة جميع اوامر البوت اضغط علي » 📚 زرار الاوامر!**
+💡 **Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!**
 
-🔖** لمعرفه طريقه استخدام اضغط علي كلمه  » ❓ زرار الدليل الاساسي!
+🔖 **To know how to use this bot, please click on the » ❓ Basic Guide button!**
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "➕ اضفني الي مجموعتك ➕",
+                        "➕ Add me to your Group ➕",
                         url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
                     )
                 ],
-                [InlineKeyboardButton("❓ الدليل الاساسي", callback_data="cbhowtouse")],
+                [InlineKeyboardButton("❓ Basic Guide", callback_data="cbhowtouse")],
                 [
-                    InlineKeyboardButton("📚 الاوامر", callback_data="cbcmds"),
-                    InlineKeyboardButton("❤️ المالك", url=f"https://t.me/{OWNER_NAME}"),
+                    InlineKeyboardButton("📚 Commands", callback_data="cbcmds"),
+                    InlineKeyboardButton("❤️ Donate", url=f"https://t.me/{OWNER_NAME}"),
                 ],
                 [
                     InlineKeyboardButton(
-                        "👥 جروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"
+                        "👥 Official Group", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        "📣 قناة السورس", url=f"https://t.me/{UPDATES_CHANNEL}"
+                        "📣 Official Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
                     ),
                 ],
                 [
                     InlineKeyboardButton(
-                        "🌐 مبرمج السورس", url="https://t.me/Q_X_I_T"
+                        "🌐 Source Code", url="https://github.com/levina-lab/video-stream"
                     )
                 ],
             ]
@@ -95,7 +95,8 @@ async def start_(client: Client, message: Message):
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
 )
-async def alive(client: Client, message: Message):
+async def alive(c: Client, message: Message):
+    chat_id = message.chat.id
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
@@ -111,9 +112,10 @@ async def alive(client: Client, message: Message):
         ]
     )
 
-    alive = f"**Hello {message.from_user.mention()}, i'm {BOT_NAME}**\n\n✨ Bot is working normally\n🍀 My Master: [{ALIVE_NAME}](https://t.me/{OWNER_NAME})\n✨ Bot Version: `v{__version__}`\n🍀 Pyrogram Version: `{pyrover}`\n✨ Python Version: `{__python_version__}`\n🍀 PyTgCalls version: `{pytover.__version__}`\n✨ Uptime Status: `{uptime}`\n\n**Thanks for Adding me here, for playing video & music on your Group's video chat** ❤"
+    alive = f"**Hello {message.from_user.mention()}, i'm {BOT_NAME}**\n\n🧑🏼‍💻 My Master: [{ALIVE_NAME}](https://t.me/{OWNER_NAME})\n👾 Bot Version: `v{__version__}`\n🔥 Pyrogram Version: `{pyrover}`\n🐍 Python Version: `{__python_version__}`\n✨ PyTgCalls Version: `{pytover.__version__}`\n🆙 Uptime Status: `{uptime}`\n\n❤ **Thanks for Adding me here, for playing video & music on your Group's video chat**"
 
-    await message.reply_photo(
+    await c.send_photo(
+        chat_id,
         photo=f"{ALIVE_IMG}",
         caption=alive,
         reply_markup=keyboard,
@@ -147,9 +149,9 @@ async def new_chat(c: Client, m: Message):
     for member in m.new_chat_members:
         if member.id == bot_id:
             return await m.reply(
-                "❤️ **شكرا لك لاضافتني الى المجموعه !**\n\n"
-                "**ارفعني ادمن فالمجموعه اكتب انضم لينضم حساب المساعد.**\n\n"
-                "اكتب ريلود ليشتغل بشكل جيد reload",
+                "❤️ Thanks for adding me to the **Group** !\n\n"
+                "Appoint me as administrator in the **Group**, otherwise I will not be able to work properly, and don't forget to type `/userbotjoin` for invite the assistant.\n\n"
+                "Once done, then type `/reload`",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -162,46 +164,3 @@ async def new_chat(c: Client, m: Message):
                     ]
                 )
             )
-            
-            
-@app.on_message(filters.command("broadcast") & filters.user(SUDOERS))
-async def broadcast(_, message):
-    if not message.reply_to_message:
-        pass
-    else:
-        x = message.reply_to_message.message_id
-        y = message.chat.id
-        sent = 0
-        chats = []
-        schats = await get_served_chats()
-        for chat in schats:
-            chats.append(int(chat["chat_id"]))
-        for i in chats:
-            try:
-                m = await app.forward_messages(i, y, x)
-                await asyncio.sleep(0.3)
-                sent += 1
-            except Exception:
-                pass
-        await message.reply_text(f"Broadcasted Message In {sent} Chats.")
-        return
-    if len(message.command) < 2:
-        await message.reply_text(
-            "Usage:\n/broadcast [MESSAGE] or [Reply to a Message]"
-        )
-        return
-    text = message.text.split(None, 1)[1]
-    sent = 0
-    chats = []
-    schats = await get_served_chats()
-    for chat in schats:
-        chats.append(int(chat["chat_id"]))
-    for i in chats:
-        try:
-            m = await app.send_message(i, text=text)
-            await asyncio.sleep(0.3)
-            sent += 1
-        except Exception:
-            pass
-    await message.reply_text(f"Broadcasted Message In {sent} Chats.")
-    
