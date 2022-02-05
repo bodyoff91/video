@@ -15,7 +15,7 @@ from pyrogram.types import (
 )
 
 
-@Client.on_message(command(["ريلود","relod" f"reload@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["ريلود","relod", f"reload@{BOT_USERNAME}"]) & other_filters)
 @authorized_users_only
 async def update_admin(client, message):
     global admins
@@ -107,7 +107,7 @@ async def pause(client, m: Message):
 
 
 @Client.on_message(
-    command(["كمل","resume" f"resume@{BOT_USERNAME}", "vresume"]) & other_filters
+    command(["كمل","resume", f"resume@{BOT_USERNAME}", "vresume"]) & other_filters
 )
 @authorized_users_only
 async def resume(client, m: Message):
@@ -125,7 +125,7 @@ async def resume(client, m: Message):
 
 
 @Client.on_message(
-    command(["كتم ميوزك","mute" f"mute@{BOT_USERNAME}", "vmute"]) & other_filters
+    command(["كتم ميوزك","mute", f"mute@{BOT_USERNAME}", "vmute"]) & other_filters
 )
 @authorized_users_only
 async def mute(client, m: Message):
@@ -143,7 +143,7 @@ async def mute(client, m: Message):
 
 
 @Client.on_message(
-    command(["الغاء كتم ميوزك","unmute" f"unmute@{BOT_USERNAME}", "vunmute"]) & other_filters
+    command(["الغاء كتم ميوزك","unmute", f"unmute@{BOT_USERNAME}", "vunmute"]) & other_filters
 )
 @authorized_users_only
 async def unmute(client, m: Message):
@@ -254,7 +254,7 @@ async def cbunmute(_, query: CallbackQuery):
 
 
 @Client.on_message(
-    command([الصوت","صوت","ص","vol","volume" f"volume@{BOT_USERNAME}", "vol"]) & other_filters
+    command([الصوت","صوت","ص","volume", f"volume@{BOT_USERNAME}", "vol"]) & other_filters
 )
 @authorized_users_only
 async def change_volume(client, m: Message):
