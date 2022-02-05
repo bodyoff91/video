@@ -46,7 +46,7 @@ async def ytdl(format: str, link: str):
     return 0, stderr
 
 
-@Client.on_message(command(["شغل", f"play@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["شغل","play","p","ش","شغل", f"play@{BOT_USERNAME}"]) & other_filters)
 async def play(c: Client, m: Message):
     await m.delete()
     replied = m.reply_to_message
@@ -187,7 +187,7 @@ async def play(c: Client, m: Message):
                             await m.reply_photo(
                                 photo=image,
                                 reply_markup=InlineKeyboardMarkup(buttons),
-                                caption=f"💡 **Track added to queue »** `{pos}`\n\n🗂 **Name:** [{songname}]({url}) | `music`\n**⏱ Duration:** `{duration}`\n🧸 **Request by:** {requester}",
+                                caption=f"💡 **Track added to queue »** `{pos}`\n\n **Name:** [{songname}]({url}) | `music`\n** Duration:** `{duration}`\n **Request by:** {requester}",
                             )
                         else:
                             try:
