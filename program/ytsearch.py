@@ -30,7 +30,8 @@ async def ytsearch(_, message: Message):
     )
 
     try:
-        if len(message.command) < 2:
+        if len(message.command) < 2:"بحث",
+
             await message.reply_text("/search **needs an argument !**")
             return
         query = message.text.split(None, 1)[1]
