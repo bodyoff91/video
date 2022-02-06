@@ -38,7 +38,7 @@ ydl_opts = {
 }
 
 
-@Client.on_message(command(["song","تحميل", f"song@{bn}"]) & ~filters.edited)
+@Client.on_message(command(["song", "تحميل", f"song@{bn}"]) & ~filters.edited)
 def song(_, message):
     query = " ".join(message.command[1:])
     m = message.reply("🔎 finding song...")
@@ -138,7 +138,7 @@ async def vsong(client, message):
         print(e)
 
 
-@Client.on_message(command(["lyric", f"lyric@{bn}", "lyrics"]))
+@Client.on_message(command(["lyric", "كلمات", f"lyric@{bn}", "lyrics"]))
 async def get_lyric_genius(_, message: Message):
     if len(message.command) < 2:
         return await message.reply_text("**usage:**\n\n/lyrics (song name)")
