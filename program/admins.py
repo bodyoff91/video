@@ -254,7 +254,7 @@ async def cbunmute(_, query: CallbackQuery):
 
 
 @Client.on_message(
-    command([الصوت","صوت","ص","volume", f"volume@{BOT_USERNAME}", "vol"]) & other_filters
+    command([الصوت","صوت","ص","volume", f"volume@{BOT_USERNAME}","vol"]) & other_filters
 )
 @authorized_users_only
 async def change_volume(client, m: Message):
