@@ -49,7 +49,7 @@ async def _human_time_duration(seconds):
 
 
 @Client.on_message(
-    command(["start","/start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
+    command(["start","/start","تشغيل", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
