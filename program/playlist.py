@@ -19,7 +19,7 @@ keyboard = InlineKeyboardMarkup(
 )
 
 
-@Client.on_message(command(["playlist","القائمه", f"playlist@{BOT_USERNAME}", "queue", f"queue@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["playlist", "القائمه", f"playlist@{BOT_USERNAME}", "queue", f"queue@{BOT_USERNAME}"]) & other_filters)
 async def playlist(client, m: Message):
    chat_id = m.chat.id
    if chat_id in QUEUE:
